@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -22,14 +21,23 @@ public class RegisterController {
 
     @PostMapping
     public ResponseEntity<RegisterUserResponseDTO> create(@RequestBody @Valid RegisterUserRequestDTO requestDTO) {
+        logger.info("Recebendo requisição para criar usuário com email: {}", requestDTO.getEmail());
+
         if (!requestDTO.isPasswordsEqual()) {
-            logger.error("Password and confirmation do not match for email: {}", requestDTO.getEmail());
+            logger.error("Senha e confirmação não coincidem para o email: {}", requestDTO.getEmail());
             return ResponseEntity.badRequest().build();
         }
-        RegisterUserResponseDTO responseDTO = registerService.createUser(requestDTO);
-        logger.info("User created with email: {}", requestDTO.getEmail());
-        return ResponseEntity.status(201).body(responseDTO);
+
+        try {
+            RegisterUserResponseDTO responseDTO = registerService.createUser(requestDTO);
+            logger.info("Usuário criado com sucesso: {}", requestDTO.getEmail());
+            return ResponseEntity.status(201).body(responseDTO);
+        } catch (Exception e) {
+            logger.error("Erro ao criar usuário com email: {}", requestDTO.getEmail(), e);
+            return ResponseEntity.status(500).body(null);  // Retorna erro 500 se ocorrer exceção
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<RegisterUserResponseDTO> update(@PathVariable Long id, @RequestBody @Valid RegisterUserRequestDTO requestDTO) {
