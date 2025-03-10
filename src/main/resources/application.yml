@@ -4,7 +4,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://skillforge-database.c506c4ogq3yn.sa-east-1.rds.amazonaws.com:5432/skillforge-database
+    url: jdbc:postgresql://skillforgedb.c506c4ogq3yn.sa-east-1.rds.amazonaws.com:5432/skillforge
     username: postgres
     password: Skillforge
 
