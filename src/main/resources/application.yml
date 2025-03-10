@@ -16,3 +16,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect  # Dialeto para PostgreSQL 9.5 ou mais recente
     properties:
       hibernate.format_sql: true
+logging:
+  level:
+    org.springframework: DEBUG
+    org.hibernate: DEBUG
