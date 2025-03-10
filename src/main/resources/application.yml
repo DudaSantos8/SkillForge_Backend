@@ -2,20 +2,20 @@ spring:
   application:
     name: SkillForge
 
-  docker:
-    compose:
-      enabled: false
-
   datasource:
     driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://skillforge-db.c506c4ogq3yn.sa-east-1.rds.amazonaws.com:5432/skillforge-db
+    username: postgres
+    password: skillforge
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Dialeto para PostgreSQL 9.5 ou mais recente
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate.format_sql: true
+
 logging:
   level:
     org.springframework: DEBUG
