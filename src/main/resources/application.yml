@@ -20,3 +20,7 @@ logging:
   level:
     org.springframework: DEBUG
     org.hibernate: DEBUG
+
+  docker:
+    compose:
+      enabled: false
